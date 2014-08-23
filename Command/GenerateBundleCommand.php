@@ -93,7 +93,7 @@ EOT
 
         $shared = $input->getOption('shared');
 
-        $namespace = Validators::validateBundleNamespace($input->getOption('namespace'));
+        $namespace = Validators::validateBundleNamespace($input->getOption('namespace'), $input->getOption('shared'));
         if (!$bundle = $input->getOption('bundle-name')) {
             $bundle = strtr($namespace, array('\\' => ''));
         }
@@ -148,7 +148,7 @@ EOT
         // namespace
         $namespace = null;
         try {
-            $namespace = $input->getOption('namespace') ? Validators::validateBundleNamespace($input->getOption('namespace')) : null;
+            $namespace = $input->getOption('namespace') ? Validators::validateBundleNamespace($input->getOption('namespace'), $input->getOption('shared')) : null;
         } catch (\Exception $error) {
             $output->writeln($dialog->getHelperSet()->get('formatter')->formatBlock($error->getMessage(), 'error'));
         }
